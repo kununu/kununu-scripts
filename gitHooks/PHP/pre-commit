@@ -1,0 +1,45 @@
+#!/bin/sh
+echo "\e[0;34mPre commit hook starting\e[0m"
+
+CHANGED_FILES=$(git diff --cached --name-only --diff-filter=ACM -- '*.php')
+
+if [ -n "$CHANGED_FILES" ]; then
+    REPO_PATH=$(git rev-parse --show-toplevel)
+    PHP_CS_CONFIG="$REPO_PATH/.php_cs"
+    PHP_CS_FIXER='php-cs-fixer'
+
+    if ! [ -x "$(command -v $PHP_CS_FIXER)" ]; then
+         echo '\e[0;31mMissing php-cs-fixer executable\e[0m'
+         echo '// Install:'
+         echo 'wget https://cs.symfony.com/download/php-cs-fixer-v2.phar -O php-cs-fixer'
+         echo 'chmod a+x php-cs-fixer'
+         echo 'php-cs-fixer self-update'
+         echo 'sudo mv php-cs-fixer /usr/local/bin/php-cs-fixer'
+
+         exit 1
+    fi
+
+    OUTPUT="$($PHP_CS_FIXER fix --config "$PHP_CS_CONFIG" $CHANGED_FILES)"
+    case $OUTPUT in
+        *"1) "*)
+            echo "\e[1;32m[POLICY]\e[0m"
+    	    echo "\e[1;33m${OUTPUT}\e[0m"
+    	    echo '----------------------------------------------------------------------------------------------------------------------------------'
+	        echo "\e[1;33mThe files you are committing do not follow the code standard, fixes where applied please review/add them to your commit\e[0m"
+
+    	    exit 1
+    esac
+
+    # Check if files that are staged follow the standard
+    for changed in $CHANGED_FILES; do
+        if git show :"$changed" | $PHP_CS_FIXER fix -n --config "$PHP_CS_CONFIG" - 2>/dev/null | grep -q "1) "; then
+            echo "\e[1;32m[POLICY]\e[0m"
+            echo '----------------------------------------------------------------------------------------------------------------------------------'
+            echo "\e[1;33mFile \e[0;34m$changed\e[0m \e[1;33mdoesn't follow the code standard, fixes where applied please review/add them to your commit\e[0m"
+
+            exit 1
+        fi
+    done
+fi
+
+echo "\e[0;34mPre commit hook finish\e[0m"
