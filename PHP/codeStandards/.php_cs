@@ -42,6 +42,8 @@ return PhpCsFixer\Config::create()
         'self_accessor' => false,
         'binary_operator_spaces' => ['align_double_arrow' => true],
         'native_constant_invocation' => false,
+        'void_return' => true,
+        'concat_space' => ['spacing' => 'one'],
     ])
     ->setFinder($finder)
 ;
