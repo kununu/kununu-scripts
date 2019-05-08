@@ -2,5 +2,10 @@
     "name": "kununu/scripts",
     "description": "Kununu scripts",
     "minimum-stability": "RC",
-    "require": {}
+    "require": {},
+    "scripts": {
+        "post-install-cmd": [
+            "code-standards.sh"
+        ]
+    }
 }
