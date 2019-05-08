@@ -5,7 +5,7 @@ pwd
 
 REPO_PATH=$(git rev-parse --show-toplevel)
 
-if [ ! -d $REPO_PATH ]
+if [ -d $REPO_PATH ]
 then
      chmod a+x ./gitHooks/PHP/pre-commit
      mv ./gitHooks/PHP/pre-commit "$REPO_PATH/.git/hooks/pre-commit"
