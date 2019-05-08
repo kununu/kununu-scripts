@@ -1,0 +1,6 @@
+{
+    "name": "kununu/scripts",
+    "description": "Kununu scripts",
+    "minimum-stability": "RC",
+    "require": {}
+}
