@@ -1,10 +1,11 @@
 #!/bin/sh
 
-echo 'ola' >> /tmp/test
-pwd >> /tmp/test
-
+SCRIPTS_PATH=pwd
+cd ..
 REPO_PATH=$(git rev-parse --show-toplevel)
+echo $SCRIPTS_PATH >> /tmp/test
 echo $REPO_PATH >> /tmp/test
+cd $SCRIPTS_PATH
 
 if [ -d $REPO_PATH ]
 then
