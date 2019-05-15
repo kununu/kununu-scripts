@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SCRIPTS_PATH=pwd
+SCRIPTS_PATH=$(pwd)
 cd ..
 REPO_PATH=$(git rev-parse --show-toplevel)
 echo $SCRIPTS_PATH >> /tmp/test
