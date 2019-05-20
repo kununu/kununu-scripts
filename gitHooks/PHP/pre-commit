@@ -8,6 +8,13 @@ if [ -n "$CHANGED_FILES" ]; then
     PHP_CS_CONFIG="$REPO_PATH/.git/hooks/.php_cs"
     PHP_CS_FIXER='php-cs-fixer'
 
+    if ! [ -f "$PHP_CS_CONFIG" ]; then
+        echo '\e[0;31mMissing php-cs-fixer rules file\e[0m'
+        echo "\e[1;33m$PHP_CS_CONFIG\e[0m"
+
+        exit 1
+    fi
+
     if ! [ -x "$(command -v $PHP_CS_FIXER)" ]; then
          echo '\e[0;31mMissing php-cs-fixer executable\e[0m'
          echo '// Install:'

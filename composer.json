@@ -2,9 +2,5 @@
     "name": "kununu/scripts",
     "description": "Kununu scripts",
     "minimum-stability": "RC",
-    "require": {},
-    "scripts": {
-        "post-install-cmd": ["bash code-standards.sh"],
-        "post-update-cmd": ["bash code-standards.sh"]
-    }
+    "require": {}
 }

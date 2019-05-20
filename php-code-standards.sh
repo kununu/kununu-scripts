@@ -1,11 +1,9 @@
 #!/bin/sh
 
-SCRIPTS_PATH=$(pwd)
-cd ..
+echo 'Starting PHP code standards ...'
+
 REPO_PATH=$(git rev-parse --show-toplevel)
-echo $SCRIPTS_PATH >> /tmp/test
 echo $REPO_PATH >> /tmp/test
-cd $SCRIPTS_PATH
 
 if [ -d $REPO_PATH ]
 then
