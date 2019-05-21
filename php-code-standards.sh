@@ -4,8 +4,8 @@ REPO_PATH=$(git rev-parse --show-toplevel)
 
 if [ -d $REPO_PATH ]
 then
-    PATH=$(pwd)
-    chmod a+x "$PATH/gitHooks/PHP/pre-commit"
-    cp "$PATH/gitHooks/PHP/pre-commit" "$REPO_PATH/.git/hooks/pre-commit"
-    cp "$PATH/PHP/codeStandards/.php_cs" "$REPO_PATH/.git/hooks/.php_cs"
+    PWD=`pwd`
+    chmod a+x "$PWD/gitHooks/PHP/pre-commit"
+    cp "$PWD/gitHooks/PHP/pre-commit" "$REPO_PATH/.git/hooks/pre-commit"
+    cp "$PWD/PHP/codeStandards/.php_cs" "$REPO_PATH/.git/hooks/.php_cs"
 fi
