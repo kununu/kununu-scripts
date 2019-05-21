@@ -2,5 +2,16 @@
     "name": "kununu/scripts",
     "description": "Kununu scripts",
     "minimum-stability": "RC",
-    "require": {}
+    "require": {},
+    "scripts": {
+        "php:code:standards": "php-code-standards.sh",
+        "post-install-cmd": [
+            "@php:code:standards",
+            "PackageVersions\\Installer::dumpVersionsClass"
+        ],
+        "post-update-cmd": [
+            "PackageVersions\\Installer::dumpVersionsClass",
+            "@php:code:standards"
+        ]
+    }
 }
