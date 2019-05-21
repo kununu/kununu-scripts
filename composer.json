@@ -3,15 +3,4 @@
     "description": "Kununu scripts",
     "minimum-stability": "RC",
     "require": {},
-    "scripts": {
-        "php:code:standards": "bash php-code-standards.sh",
-        "post-install-cmd": [
-            "./PhpCodeStandards.php",
-            "@php:code:standards"
-        ],
-        "post-update-cmd": [
-            "./PhpCodeStandards.php",
-            "@php:code:standards"
-        ]
-    }
 }
