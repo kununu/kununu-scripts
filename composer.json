@@ -4,13 +4,13 @@
     "minimum-stability": "RC",
     "require": {},
     "scripts": {
-        "php:code:standards": "php-code-standards.sh",
+        "php:code:standards": "bash php-code-standards.sh",
         "post-install-cmd": [
-            "@php:code:standards",
-            "PackageVersions\\Installer::dumpVersionsClass"
+            "./PhpCodeStandards.php",
+            "@php:code:standards"
         ],
         "post-update-cmd": [
-            "PackageVersions\\Installer::dumpVersionsClass",
+            "./PhpCodeStandards.php",
             "@php:code:standards"
         ]
     }
