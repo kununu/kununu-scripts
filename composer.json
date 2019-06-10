@@ -10,5 +10,8 @@
         "psr-4": {
             "Kununu\\Scripts\\": "src/"
         }
+    },
+    "extra": {
+        "class": "Kununu\\Scripts\\"
     }
 }
