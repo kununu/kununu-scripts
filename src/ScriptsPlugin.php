@@ -4,12 +4,20 @@ namespace Kununu\Scripts;
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
 use Composer\IO\IOInterface;
-use Composer\Plugin\PluginEvents;
-use Composer\Plugin\PluginInterface;
+use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
 
 class ScriptsPlugin implements PluginInterface, EventSubscriberInterface
 {
+    protected $composer;
+    protected $io;
+
+    public function activate(Composer $composer, IOInterface $io)
+    {
+        $this->composer = $composer;
+        $this->io = $io;
+    }
+
     public static function getSubscribedEvents()
     {
         return [
@@ -18,13 +26,7 @@ class ScriptsPlugin implements PluginInterface, EventSubscriberInterface
         ];
     }
 
-    public function activate(Composer $composer, IOInterface $io)
-    {
-        $installer = new TemplateInstaller($io, $composer);
-        $composer->getInstallationManager()->addInstaller($installer);
-    }
-
-    private function installPlugin(Event $event, $operations = [])
+    private function installDependencies(Event $event, $operations = [])
     {
         echo 'Event<pre>';
         print_r($event);
@@ -33,6 +35,11 @@ class ScriptsPlugin implements PluginInterface, EventSubscriberInterface
         echo 'Operations<pre>';
         print_r($operations);
         echo '</pre>';
+
+        echo '<pre>';
+        print_r($event->getComposer()->getConfig());
+        echo '</pre>';
+        die;
 
         echo '-------------- OLA --------------------', PHP_EOL;
         $this->addPHPHooks();
@@ -50,6 +57,7 @@ class ScriptsPlugin implements PluginInterface, EventSubscriberInterface
 
     public function update(Event $event, $operations = [])
     {
-        $this->installPlugin($event, $operations);
+        $this->installDependencies($event, $operations);
     }
 }
+
