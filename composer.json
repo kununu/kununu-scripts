@@ -2,6 +2,7 @@
     "name": "kununu/scripts",
     "type": "composer-plugin",
     "require": {
+        "php": ">=7.1.0",
         "composer-plugin-api": "^1.1"
     },
     "extra": {
