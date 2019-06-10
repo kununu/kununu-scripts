@@ -29,18 +29,18 @@ class ScriptsPlugin implements PluginInterface, EventSubscriberInterface
 
     private function installDependencies(Event $event, $operations = [])
     {
-        echo 'Event<pre>';
-        print_r($event);
-        echo '</pre>';
-
-        echo 'Operations<pre>';
-        print_r($operations);
-        echo '</pre>';
-
-        echo '<pre>';
-        print_r($event->getComposer()->getConfig());
-        echo '</pre>';
-        die;
+//        echo 'Event<pre>';
+//        print_r($event);
+//        echo '</pre>';
+//
+//        echo 'Operations<pre>';
+//        print_r($operations);
+//        echo '</pre>';
+//
+//        echo '<pre>';
+//        print_r($event->getComposer()->getConfig());
+//        echo '</pre>';
+//        die;
 
         echo '-------------- OLA --------------------', PHP_EOL;
         $this->addPHPHooks();
