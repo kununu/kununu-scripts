@@ -1,6 +1,14 @@
 {
     "name": "kununu/scripts",
+    "type": "composer-plugin",
     "description": "Kununu scripts",
-    "minimum-stability": "RC",
-    "require": {}
+    "require": {
+        "php": ">=7.1.0",
+        "composer-plugin-api": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kununu\\Scripts\\": "src/"
+        }
+    }
 }
