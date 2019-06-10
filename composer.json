@@ -12,6 +12,6 @@
         }
     },
     "extra": {
-        "class": "Kununu\\Scripts\\"
+        "class": "Kununu\\Scripts\\ScriptsPlugin"
     }
 }
