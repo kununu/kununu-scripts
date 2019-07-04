@@ -1,0 +1,50 @@
+<?php
+
+// Usage
+// php-cs-fixer fix . --diff --dry-run --config=<path>/.php_cs -> [--dry-run (don't apply changes)] [--diff show differences]
+// php-cs-fixer fix application/ --config=<path>/.php_cs -> it will apply changes to all php files
+// php-cs-fixer fix application/Bootstrap.php --config=<path>/.php_cs -> it will apply only changes to a file or directory
+
+// Install:
+// wget https://cs.symfony.com/download/php-cs-fixer-v2.phar -O php-cs-fixer
+// chmod a+x php-cs-fixer
+// php-cs-fixer self-update
+// sudo mv php-cs-fixer /usr/local/bin/php-cs-fixer
+
+// Help on rules -> https://mlocati.github.io/php-cs-fixer-configurator/#
+
+$finder = PhpCsFixer\Finder::create()
+    ->exclude('vendor')
+    ->in(__DIR__)
+;
+
+return PhpCsFixer\Config::create()
+    ->setCacheFile('/tmp/.php_cs.cache')
+    ->setRiskyAllowed(true)
+    ->setRules([
+        '@Symfony' => true,
+        '@Symfony:risky' => true,
+        'array_syntax' => ['syntax' => 'short'],
+        'combine_consecutive_unsets' => true,
+        'heredoc_to_nowdoc' => true,
+        'no_extra_consecutive_blank_lines' => ['tokens' => ['break', 'continue', 'extra', 'return', 'throw', 'use', 'parenthesis_brace_block', 'square_brace_block', 'curly_brace_block']],
+        'no_short_echo_tag' => true,
+        'no_unreachable_default_argument_value' => true,
+        'no_useless_else' => true,
+        'no_useless_return' => true,
+        'ordered_imports' => true,
+        'phpdoc_order' => true,
+        'function_declaration' => ['closure_function_spacing' => 'none'],
+        'ternary_to_null_coalescing' => true,
+        'method_chaining_indentation' => true,
+        'array_indentation' => true,
+        'blank_line_after_opening_tag' => false,
+        'self_accessor' => false,
+        'binary_operator_spaces' => ['align_double_arrow' => true],
+        'native_constant_invocation' => false,
+        'void_return' => true,
+        'concat_space' => ['spacing' => 'one'],
+        'native_function_invocation' => false,
+    ])
+    ->setFinder($finder)
+;
