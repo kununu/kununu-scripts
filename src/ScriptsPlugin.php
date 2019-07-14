@@ -1,19 +1,29 @@
 <?php
+
 namespace Kununu\Scripts;
 
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
 use Composer\IO\IOInterface;
+use Composer\Plugin\Capability\CommandProvider;
+use Composer\Plugin\Capable;
 use Composer\Plugin\PluginInterface;
 use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
+use Kununu\Scripts\PHPCodeStandards\Command\PHPCsFixerGitHookCommand;
+use Kununu\Scripts\PHPCodeStandards\PHPCsFixerCommandProvider;
+use Symfony\Component\Console\Input\StringInput;
+use Symfony\Component\Console\Output\StreamOutput;
 
-class ScriptsPlugin implements PluginInterface, EventSubscriberInterface
+class ScriptsPlugin implements PluginInterface, EventSubscriberInterface, Capable
 {
+    /** @var Composer */
     protected $composer;
+
+    /** @var IOInterface */
     protected $io;
 
-    public function activate(Composer $composer, IOInterface $io)
+    public function activate(Composer $composer, IOInterface $io): void
     {
         $this->composer = $composer;
         $this->io = $io;
@@ -23,42 +33,38 @@ class ScriptsPlugin implements PluginInterface, EventSubscriberInterface
     {
         return [
             ScriptEvents::POST_INSTALL_CMD => 'install',
-            ScriptEvents::POST_UPDATE_CMD => 'update',
+            ScriptEvents::POST_UPDATE_CMD  => 'update',
         ];
     }
 
-    private function installDependencies(Event $event, $operations = [])
+    private function installDependencies(Event $event, $operations = []): void
     {
-//        echo 'Event<pre>';
-//        print_r($event);
-//        echo '</pre>';
-//
-//        echo 'Operations<pre>';
-//        print_r($operations);
-//        echo '</pre>';
-//
-//        echo '<pre>';
-//        print_r($event->getComposer()->getConfig());
-//        echo '</pre>';
-//        die;
-
-        echo '-------------- OLA --------------------', PHP_EOL;
-        $this->addPHPHooks();
+        $this->addPHPGitHooks();
     }
 
-    private function addPHPHooks()
+    private function addPHPGitHooks(): void
     {
-        echo '-------------- addPHPHooks --------------------', PHP_EOL;
+        $command = new PHPCsFixerGitHookCommand();
+        $command->setComposer($this->composer);
+        $command->setIO($this->io);
+
+        $command->run(new StringInput(''), new StreamOutput(fopen('php://stdout', 'w')));
     }
 
-    public function install(Event $event)
+    public function install(Event $event): void
     {
         $this->update($event);
     }
 
-    public function update(Event $event, $operations = [])
+    public function update(Event $event, $operations = []): void
     {
         $this->installDependencies($event, $operations);
     }
-}
 
+    public function getCapabilities()
+    {
+        return [
+            CommandProvider::class => PHPCsFixerCommandProvider::class,
+        ];
+    }
+}

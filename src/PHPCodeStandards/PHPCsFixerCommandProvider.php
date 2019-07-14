@@ -1,11 +1,10 @@
 <?php
+
 namespace Kununu\Scripts\PHPCodeStandards;
 
+use Composer\Plugin\Capability\CommandProvider as CommandProviderCapability;
 use Kununu\Scripts\PHPCodeStandards\Command\PHPCsFixerCodeCommand;
 use Kununu\Scripts\PHPCodeStandards\Command\PHPCsFixerGitHookCommand;
-
-use Composer\Plugin\Capability\CommandProvider as CommandProviderCapability;
-use Composer\Command\BaseCommand;
 
 class PHPCsFixerCommandProvider implements CommandProviderCapability
 {
@@ -13,7 +12,7 @@ class PHPCsFixerCommandProvider implements CommandProviderCapability
     {
         return [
             new PHPCsFixerCodeCommand(),
-            new PHPCsFixerGitHookCommand()
+            new PHPCsFixerGitHookCommand(),
         ];
     }
 }
