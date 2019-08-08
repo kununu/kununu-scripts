@@ -3,7 +3,9 @@
     "type": "composer-plugin",
     "require": {
         "php": ">=7.1.0",
-        "composer-plugin-api": "^1.1"
+        "composer-plugin-api": "^1.1",
+        "composer/composer": "^1.0.2", -- This is not needed only added for development purposes
+        "friendsofphp/php-cs-fixer": "^2.15"
     },
     "extra": {
         "class": "Kununu\\Scripts\\ScriptsPlugin"

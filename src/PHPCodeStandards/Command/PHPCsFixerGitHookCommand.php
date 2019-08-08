@@ -27,11 +27,15 @@ class PHPCsFixerGitHookCommand extends BaseCommand
             return;
         }
 
+        // $currentFolder = dirname(__FILE__); Not sure if this is the same as below
         $currentFolder = __DIR__;
 
         copy($currentFolder . '/../php_cs', $gitHooksPath . '/.php_cs');
         copy($currentFolder . '/../git-pre-commit', $gitHooksPath . '/pre-commit');
         chmod($gitHooksPath . '/pre-commit', 0777);
+        $csFixerExec = '../../services/vendor/kununu/scripts/vendor/bin/php-cs-fixer';
+        unlink($csFixerExec);
+        symlink($csFixerExec, $gitHooksPath . '/php-cs-fixer');
 
         $output->writeln('<info>' . $this->getName() . '</info> .... Git Hook Applied');
     }
