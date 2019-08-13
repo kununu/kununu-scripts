@@ -17,6 +17,7 @@ class PHPCsFixerGitHookCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
+        return;
         $output->writeln('<info>' . $this->getName() . '</info> Appling PHP CS Fixer Git Pre-Commit Hook ....');
         $path = dirname($this->getComposer()->getConfig()->getConfigSource()->getName()) . '/..';
 
