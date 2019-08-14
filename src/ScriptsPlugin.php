@@ -3,7 +3,6 @@
 namespace Kununu\Scripts;
 
 use Composer\Composer;
-// use Composer\Console\Application; -- was testing
 use Composer\DependencyResolver\Operation\UpdateOperation;
 use Composer\EventDispatcher\EventSubscriberInterface;
 use Composer\IO\IOInterface;

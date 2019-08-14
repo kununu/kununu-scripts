@@ -20,23 +20,50 @@ class PHPCsFixerGitHookCommand extends BaseCommand
         $output->writeln('<info>' . $this->getName() . '</info> Appling PHP CS Fixer Git Pre-Commit Hook ....');
         $path = dirname($this->getComposer()->getConfig()->getConfigSource()->getName()) . '/..';
 
-        $gitHooksPath = $path . '/.git/hooks';
-        if (!is_dir($gitHooksPath)) {
-            $this->getIO()->writeError('<error>GIT folder not found at ' . $gitHooksPath . '</error>');
+        $gitPath = $path . '/.git';
+        if (!is_dir($gitPath)) {
+            $this->getIO()->writeError('<error>GIT folder not found at "' . $gitFolder . '"</error>');
 
             return;
         }
 
-        // $currentFolder = dirname(__FILE__); Not sure if this is the same as below
         $currentFolder = __DIR__;
+        $this->addGitHook($gitPath, $currentFolder . '/../git-pre-commit', 'pre-commit');
 
-        copy($currentFolder . '/../php_cs', $gitHooksPath . '/.php_cs');
-        copy($currentFolder . '/../git-pre-commit', $gitHooksPath . '/pre-commit');
-        chmod($gitHooksPath . '/pre-commit', 0777);
-        $csFixerExec = '../../services/vendor/kununu/scripts/vendor/bin/php-cs-fixer';
-        unlink($csFixerExec);
-        symlink($csFixerExec, $gitHooksPath . '/php-cs-fixer');
+        $this->addLinkToKununuFolder(
+            $gitPath,
+            '../../services/vendor/kununu/scripts/src/PHPCodeStandards/php_cs',
+            '.php_cs'
+        );
+        $this->addLinkToKununuFolder(
+            $gitPath,
+            '../../services/vendor/kununu/scripts/vendor/bin/php-cs-fixer',
+            'php-cs-fixer'
+        );
 
         $output->writeln('<info>' . $this->getName() . '</info> .... Git Hook Applied');
+    }
+
+    private function addGitHook(string $gitPath, string $file, string $hookName): void
+    {
+        $hookPath = $gitPath . '/hooks/' . $hookName;
+
+        copy($file, $hookPath);
+        chmod($hookPath, 0777);
+    }
+
+    private function addLinkToKununuFolder(string $gitPath, string $origin, string $linkName): void
+    {
+        $kununuBinPath = $gitPath . '/kununu';
+        if (!is_dir($kununuBinPath)) {
+            mkdir($kununuBinPath);
+        }
+
+        $kununuLink = $kununuBinPath . '/' . $linkName;
+        if (is_link($kununuLink)) {
+            unlink($kununuLink);
+        }
+
+        symlink($origin, $kununuLink);
     }
 }
