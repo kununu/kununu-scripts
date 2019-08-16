@@ -48,6 +48,7 @@ class PHPCsFixerGitHookCommand extends BaseCommand
     {
         $hookPath = $gitPath . '/hooks/' . $hookName;
 
+        unlink($hookPath);
         copy($file, $hookPath);
         chmod($hookPath, 0777);
     }
