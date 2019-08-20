@@ -1,7 +1,7 @@
 #!/bin/sh
 
-IS_MERGE = $(git rev-parse -q --verify MERGE_HEAD)
-if [[ ! -z "$IS_MERGE" ]] ; then
+IS_MERGE=$(git rev-parse -q --verify MERGE_HEAD)
+if [ -n "$IS_MERGE" ] ; then
     exit 0
 fi
 
@@ -22,12 +22,7 @@ if [ -n "$CHANGED_FILES" ]; then
     fi
 
     if ! [ -x "$(command -v $PHP_CS_FIXER)" ]; then
-         echo '\e[0;31mMissing php-cs-fixer executable\e[0m'
-         echo '// Install:'
-         echo 'wget https://cs.symfony.com/download/php-cs-fixer-v2.phar -O php-cs-fixer'
-         echo 'chmod a+x php-cs-fixer'
-         echo 'php-cs-fixer self-update'
-         echo 'sudo mv php-cs-fixer /usr/local/bin/php-cs-fixer'
+         echo '\e[0;31mMissing php-cs-fixer or php executable\e[0m'
 
          exit 1
     fi
@@ -35,10 +30,10 @@ if [ -n "$CHANGED_FILES" ]; then
     OUTPUT="$($PHP_CS_FIXER fix --config "$PHP_CS_CONFIG" $CHANGED_FILES)"
     case $OUTPUT in
         *"1) "*)
-            echo "\e[1;32m[POLICY]\e[0m"
-    	    echo "\e[1;33m${OUTPUT}\e[0m"
-    	    echo '----------------------------------------------------------------------------------------------------------------------------------'
-	        echo "\e[1;33mThe files you are committing do not follow the code standard, fixes where applied please review/add them to your commit\e[0m"
+          echo "\e[1;32m[POLICY]\e[0m"
+          echo "\e[1;33m${OUTPUT}\e[0m"
+          echo '----------------------------------------------------------------------------------------------------------------------------------'
+          echo "\e[1;33mThe files you are committing do not follow the code standard, fixes where applied please review/add them to your commit\e[0m"
 
     	    exit 1
     esac
