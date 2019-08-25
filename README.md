@@ -58,6 +58,10 @@ git tag -a v1.0 -m "Version 1.0"
 git push --tags
 ```
 
+## Future work
+- Make this package to be self update.
+- Run the php-cs-fixer cmd inside docker so there is no need to install php cli.
+
 ## Extra
 - If you want to install locally php-cs-fixer just:
 
