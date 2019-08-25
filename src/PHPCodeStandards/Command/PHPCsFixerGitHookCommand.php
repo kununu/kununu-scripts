@@ -22,7 +22,7 @@ class PHPCsFixerGitHookCommand extends BaseCommand
 
         $gitPath = $path . '/.git';
         if (!is_dir($gitPath)) {
-            $this->getIO()->writeError('<error>GIT folder not found at "' . $gitFolder . '"</error>');
+            $this->getIO()->writeError('<error>GIT folder not found at "' . $gitPath . '"</error>');
 
             return;
         }
@@ -30,12 +30,15 @@ class PHPCsFixerGitHookCommand extends BaseCommand
         $currentFolder = __DIR__;
         $this->addGitHook($gitPath, $currentFolder . '/../git-pre-commit', 'pre-commit');
 
-        $this->addLinkToKununuFolder(
+        // Add php-cs-fixer rules to be available on .git folder.
+        $this->addLinkToGitFolder(
             $gitPath,
             '../../services/vendor/kununu/scripts/src/PHPCodeStandards/php_cs',
             '.php_cs'
         );
-        $this->addLinkToKununuFolder(
+
+        // Add php-cs-fixer bin to be available on .git folder.
+        $this->addLinkToGitFolder(
             $gitPath,
             '../../services/vendor/kununu/scripts/vendor/bin/php-cs-fixer',
             'php-cs-fixer'
@@ -55,8 +58,9 @@ class PHPCsFixerGitHookCommand extends BaseCommand
         chmod($hookPath, 0777);
     }
 
-    private function addLinkToKununuFolder(string $gitPath, string $origin, string $linkName): void
+    private function addLinkToGitFolder(string $gitPath, string $origin, string $linkName): void
     {
+        // In order to make it clear a folder is created named kununu with the dependencies for pre-commit.
         $kununuBinPath = $gitPath . '/kununu';
         if (!is_dir($kununuBinPath)) {
             mkdir($kununuBinPath);
