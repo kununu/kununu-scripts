@@ -52,6 +52,11 @@ kununu coding standards rules can be found [here](src/PHPCodeStandards/php_cs).
 
 ## Contributing
 - Fell free to contribute.
+- When you add a rule or change the code don't forget to create a new tag of this project.
+```
+git tag -a v1.0 -m "Version 1.0"
+git push --tags
+```
 
 ## Extra
 - If you want to install locally php-cs-fixer just:
