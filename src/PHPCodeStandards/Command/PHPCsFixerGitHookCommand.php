@@ -38,11 +38,7 @@ class PHPCsFixerGitHookCommand extends BaseCommand
         );
 
         // Add php-cs-fixer bin to be available on .git folder.
-        $this->addLinkToGitFolder(
-            $gitPath,
-            '../../services/vendor/kununu/scripts/vendor/bin/php-cs-fixer',
-            'php-cs-fixer'
-        );
+        $this->addLinkToGitFolder($gitPath, '../../services/vendor/bin/php-cs-fixer', 'php-cs-fixer');
 
         $output->writeln('<info>' . $this->getName() . '</info> .... Git Hook Applied');
     }
