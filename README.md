@@ -6,7 +6,7 @@
 - If you commit inside docker machine there are no pre-requisites,
 otherwise you have to have PHP cli installed on your local machine (this is needed because php-cs-fixer is a PHP binary).
 
-##GIT
+## GIT
 - When you commit PHP code pre-commit hook will check that your code follows the kununu standards, if not it will apply all
 the necessary changes to make it compliant.
 - You will need to add the files that were not compliant again to the git staging area and commit again.
