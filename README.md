@@ -44,10 +44,10 @@ kununu coding-standards configuration. This was done like this so the hook works
 kununu coding standards rules can be found [here](src/PHPCodeStandards/php_cs).
 
 ## Commands Usage
-###kununu:cs-fixer-git-hook
+### kununu:cs-fixer-git-hook
 - Installs kununu pre-commit git hook coding standards. Just run `composer kununu:cs-fixer-git-hook`
 
-###kununu:cs-fixer-code
+### kununu:cs-fixer-code
 - Runs PHP-CS-FIXER on a list of files and directories. Ex: `composer kununu:cs-fixer-code ./src ./src/file.php ....`
 
 ## Contributing
