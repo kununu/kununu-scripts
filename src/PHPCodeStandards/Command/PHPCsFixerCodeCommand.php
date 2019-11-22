@@ -28,7 +28,7 @@ class PHPCsFixerCodeCommand extends BaseCommand
 
             $files = implode(' ', $arguments);
             exec(
-                __DIR__ . '/../../../vendor/bin/php-cs-fixer fix --config ' . __DIR__ . '/../php_cs ' . $files,
+                $this->getComposer()->getConfig()->get('vendor-dir') . '/bin/php-cs-fixer fix --config ' . __DIR__ . '/../php_cs ' . $files,
                 $outputExec,
                 $returnVar
             );

@@ -15,6 +15,7 @@
 
 $finder = PhpCsFixer\Finder::create()
     ->exclude('vendor')
+    ->exclude('var')
     ->in(__DIR__)
 ;
 
