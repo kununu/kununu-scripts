@@ -1,6 +1,6 @@
 <?php
 
-namespace Kununu\Scripts\PHPCodeStandards;
+namespace Kununu\Scripts\PHP\CodeStandards;
 
 use Composer\Plugin\Capability\CommandProvider as CommandProviderCapability;
 use Kununu\Scripts\PHPCodeStandards\Command\PHPCsFixerCodeCommand;

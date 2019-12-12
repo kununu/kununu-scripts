@@ -1,6 +1,6 @@
 <?php
 
-namespace Kununu\Scripts\PHPCodeStandards\Command;
+namespace Kununu\Scripts\PHP\Code\Standards\Command;
 
 use Composer\Command\BaseCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,28 +17,31 @@ class PHPCsFixerGitHookCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $output->writeln('<info>' . $this->getName() . '</info> Appling PHP CS Fixer Git Pre-Commit Hook ....');
-        $path = dirname($this->getComposer()->getConfig()->getConfigSource()->getName()) . '/..';
+        $output->writeln('<info>' . $this->getName() . '</info> Applying PHP CS Fixer Git Pre-Commit Hook ....');
 
-        $gitPath = $path . '/.git';
-        if (!is_dir($gitPath)) {
-            $this->getIO()->writeError('<error>GIT folder not found at "' . $gitPath . '"</error>');
+        exec('git rev-parse --show-toplevel', $outputExec, $returnVar);
+        if (0 != $returnVar || !isset($outputExec[0])) {
+            $output->writeln('<error>GIT is not available</error>');
 
             return;
         }
 
-        $currentFolder = __DIR__;
-        $this->addGitHook($gitPath, $currentFolder . '/../git-pre-commit', 'pre-commit');
+        $gitPath = $outputExec[0] . '/.git';
+        if (!is_dir($outputExec[0])) {
+            $output->writeln('<error>GIT folder not found at "' . $gitPath . '"</error>');
+
+            return;
+        }
+
+        $vendorFolder = $this->getComposer()->getConfig()->get('vendor-dir');
+        $scriptsFolder = $vendorFolder . '/kununu/scripts/src/PHP/CodeStandards/Scripts';
+        $this->addGitHook($gitPath, $scriptsFolder . '/git-pre-commit', 'pre-commit');
 
         // Add php-cs-fixer rules to be available on .git folder.
-        $this->addLinkToGitFolder(
-            $gitPath,
-            '../../services/vendor/kununu/scripts/src/PHPCodeStandards/php_cs',
-            '.php_cs'
-        );
+        $this->addLinkToGitFolder($gitPath, $scriptsFolder . '/php_cs', '.php_cs');
 
         // Add php-cs-fixer bin to be available on .git folder.
-        $this->addLinkToGitFolder($gitPath, '../../services/vendor/bin/php-cs-fixer', 'php-cs-fixer');
+        $this->addLinkToGitFolder($gitPath, $vendorFolder . '/bin/php-cs-fixer', 'php-cs-fixer');
 
         $output->writeln('<info>' . $this->getName() . '</info> .... Git Hook Applied');
     }

@@ -7,7 +7,7 @@
         "friendsofphp/php-cs-fixer": "^2.15"
     },
     "extra": {
-        "class": "Kununu\\Scripts\\ScriptsPlugin"
+        "class": "Kununu\\Scripts\\PHP\\CodeStandards\\ScriptsPlugin"
     },
     "autoload": {
         "psr-4": {
