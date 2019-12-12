@@ -1,6 +1,6 @@
 <?php
 
-namespace Kununu\Scripts\PHP\Code\Standards\Command;
+namespace Kununu\Scripts\PHP\CodeStandards\Command;
 
 use Composer\Command\BaseCommand;
 use Symfony\Component\Console\Input\InputInterface;
