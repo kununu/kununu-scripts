@@ -10,8 +10,8 @@ use Composer\Plugin\Capable;
 use Composer\Plugin\PluginInterface;
 use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
-use Kununu\Scripts\PHPCodeStandards\Command\PHPCsFixerGitHookCommand;
-use Kununu\Scripts\PHPCodeStandards\PHPCsFixerCommandProvider;
+use Kununu\Scripts\PHP\CodeStandards\Command\PHPCsFixerGitHookCommand;
+use Kununu\Scripts\PHP\CodeStandards\PHPCsFixerCommandProvider;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\StreamOutput;
 

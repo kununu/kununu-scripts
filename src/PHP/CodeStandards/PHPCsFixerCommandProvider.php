@@ -3,8 +3,8 @@
 namespace Kununu\Scripts\PHP\CodeStandards;
 
 use Composer\Plugin\Capability\CommandProvider as CommandProviderCapability;
-use Kununu\Scripts\PHPCodeStandards\Command\PHPCsFixerCodeCommand;
-use Kununu\Scripts\PHPCodeStandards\Command\PHPCsFixerGitHookCommand;
+use Kununu\Scripts\PHP\CodeStandards\Command\PHPCsFixerCodeCommand;
+use Kununu\Scripts\PHP\CodeStandards\Command\PHPCsFixerGitHookCommand;
 
 class PHPCsFixerCommandProvider implements CommandProviderCapability
 {
