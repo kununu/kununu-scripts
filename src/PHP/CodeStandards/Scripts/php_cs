@@ -46,6 +46,7 @@ return PhpCsFixer\Config::create()
         'void_return' => true,
         'concat_space' => ['spacing' => 'one'],
         'native_function_invocation' => false,
+        'no_superfluous_phpdoc_tags' => false,
     ])
     ->setFinder($finder)
 ;

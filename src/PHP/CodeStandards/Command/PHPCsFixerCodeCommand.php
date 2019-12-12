@@ -1,6 +1,6 @@
 <?php
 
-namespace Kununu\Scripts\PHPCodeStandards\Command;
+namespace Kununu\Scripts\PHP\CodeStandards\Command;
 
 use Composer\Command\BaseCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -27,8 +27,10 @@ class PHPCsFixerCodeCommand extends BaseCommand
             $outputExec = $returnVar = null;
 
             $files = implode(' ', $arguments);
+            $vendorDir = $this->getComposer()->getConfig()->get('vendor-dir');
+
             exec(
-                $this->getComposer()->getConfig()->get('vendor-dir') . '/bin/php-cs-fixer fix --config ' . __DIR__ . '/../php_cs ' . $files,
+                $vendorDir . '/bin/php-cs-fixer fix --config ' . __DIR__ . '/../Scripts/php_cs ' . $files,
                 $outputExec,
                 $returnVar
             );

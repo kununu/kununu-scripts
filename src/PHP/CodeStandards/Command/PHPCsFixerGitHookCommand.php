@@ -1,6 +1,6 @@
 <?php
 
-namespace Kununu\Scripts\PHPCodeStandards\Command;
+namespace Kununu\Scripts\PHP\CodeStandards\Command;
 
 use Composer\Command\BaseCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,23 +17,29 @@ class PHPCsFixerGitHookCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $output->writeln('<info>' . $this->getName() . '</info> Appling PHP CS Fixer Git Pre-Commit Hook ....');
-        $path = dirname($this->getComposer()->getConfig()->getConfigSource()->getName()) . '/..';
+        $output->writeln('<info>' . $this->getName() . '</info> Applying PHP CS Fixer Git Pre-Commit Hook ....');
 
-        $gitPath = $path . '/.git';
-        if (!is_dir($gitPath)) {
-            $this->getIO()->writeError('<error>GIT folder not found at "' . $gitPath . '"</error>');
+        exec('git rev-parse --show-toplevel', $outputExec, $returnVar);
+        if (0 != $returnVar || !isset($outputExec[0])) {
+            $output->writeln('<error>GIT is not available</error>');
+
+            return;
+        }
+
+        $gitPath = $outputExec[0] . '/.git';
+        if (!is_dir($outputExec[0])) {
+            $output->writeln('<error>GIT folder not found at "' . $gitPath . '"</error>');
 
             return;
         }
 
         $currentFolder = __DIR__;
-        $this->addGitHook($gitPath, $currentFolder . '/../git-pre-commit', 'pre-commit');
+        $this->addGitHook($gitPath, $currentFolder . '/../Scripts/git-pre-commit', 'pre-commit');
 
         // Add php-cs-fixer rules to be available on .git folder.
         $this->addLinkToGitFolder(
             $gitPath,
-            '../../services/vendor/kununu/scripts/src/PHPCodeStandards/php_cs',
+            '../../services/vendor/kununu/scripts/src/PHP/CodeStandards/Scripts/php_cs',
             '.php_cs'
         );
 
