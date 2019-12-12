@@ -41,7 +41,7 @@ kununu coding-standards configuration. This was done like this so the hook works
 
 ## Help on rules
 - PHP-CS-FiXER rules can be found [here](https://mlocati.github.io/php-cs-fixer-configurator).
-kununu coding standards rules can be found [here](src/PHP/CodeStandards/php_cs).
+kununu coding standards rules can be found [here](scripts/php_cs).
 
 ## Commands Usage
 ### kununu:cs-fixer-git-hook
