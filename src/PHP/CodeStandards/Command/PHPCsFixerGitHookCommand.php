@@ -33,15 +33,18 @@ class PHPCsFixerGitHookCommand extends BaseCommand
             return;
         }
 
-        $vendorFolder = $this->getComposer()->getConfig()->get('vendor-dir');
-        $scriptsFolder = $vendorFolder . '/kununu/scripts/src/PHP/CodeStandards/Scripts';
-        $this->addGitHook($gitPath, $scriptsFolder . '/git-pre-commit', 'pre-commit');
+        $currentFolder = __DIR__;
+        $this->addGitHook($gitPath, $currentFolder . '/../Scripts/git-pre-commit', 'pre-commit');
 
         // Add php-cs-fixer rules to be available on .git folder.
-        $this->addLinkToGitFolder($gitPath, $scriptsFolder . '/php_cs', '.php_cs');
+        $this->addLinkToGitFolder(
+            $gitPath,
+            '../../services/vendor/kununu/scripts/src/PHP/CodeStandards/Scripts/php_cs',
+            '.php_cs'
+        );
 
         // Add php-cs-fixer bin to be available on .git folder.
-        $this->addLinkToGitFolder($gitPath, $vendorFolder . '/bin/php-cs-fixer', 'php-cs-fixer');
+        $this->addLinkToGitFolder($gitPath, '../../services/vendor/bin/php-cs-fixer', 'php-cs-fixer');
 
         $output->writeln('<info>' . $this->getName() . '</info> .... Git Hook Applied');
     }
