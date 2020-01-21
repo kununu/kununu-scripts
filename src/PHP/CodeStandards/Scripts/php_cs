@@ -49,7 +49,7 @@ return PhpCsFixer\Config::create()
         'no_superfluous_phpdoc_tags' => false,
         'yoda_style' => null,
         'phpdoc_summary' => false,
-
+        'increment_style' => null,
     ])
     ->setFinder($finder)
 ;
