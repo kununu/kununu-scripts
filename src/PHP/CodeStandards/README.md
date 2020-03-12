@@ -53,6 +53,7 @@ kununu coding standards rules can be found [here](Scripts/php_cs).
 ## Contributing
 - Fell free to contribute.
 - When you add a rule or change the code don't forget to create a new tag of this project.
+- Please only create the tag from master after you merge. (composer stresses if not like this)
 ```
 git tag -a v1.0 -m "Version 1.0"
 git push --tags
