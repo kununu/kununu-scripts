@@ -50,6 +50,7 @@ return PhpCsFixer\Config::create()
         'yoda_style' => null,
         'phpdoc_summary' => false,
         'increment_style' => null,
+        'method_chaining_indentation' => false,
     ])
     ->setFinder($finder)
 ;
