@@ -37,7 +37,6 @@ return PhpCsFixer\Config::create()
         'phpdoc_order' => true,
         'function_declaration' => ['closure_function_spacing' => 'none'],
         'ternary_to_null_coalescing' => true,
-        'method_chaining_indentation' => true,
         'array_indentation' => true,
         'blank_line_after_opening_tag' => false,
         'self_accessor' => false,
@@ -51,6 +50,7 @@ return PhpCsFixer\Config::create()
         'phpdoc_summary' => false,
         'increment_style' => null,
         'method_chaining_indentation' => false,
+        'single_import_per_statement' => false,
     ])
     ->setFinder($finder)
 ;
