@@ -37,7 +37,7 @@ class PHPCsFixerGitHookCommand extends BaseCommand
         $this->addGitHook($gitPath, $currentFolder . '/../Scripts/git-pre-commit', 'pre-commit');
 
         // Add php-cs-fixer rules to be available on .git folder.
-        $vendorDir = is_dir('../../services/vendor') ? '../../services/vendor' : '../../vendor';
+        $vendorDir = is_dir(sprintf('%s/services/vendor', $outputExec[0])) ? '../../services/vendor' : '../../vendor';
 
         $this->addLinkToGitFolder(
             $gitPath,
