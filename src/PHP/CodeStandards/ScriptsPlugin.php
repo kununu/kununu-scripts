@@ -28,26 +28,20 @@ class ScriptsPlugin implements PluginInterface, EventSubscriberInterface, Capabl
         $this->io = $io;
     }
 
+    public function deactivate(Composer $composer, IOInterface $io)
+    {
+    }
+
+    public function uninstall(Composer $composer, IOInterface $io)
+    {
+    }
+
     public static function getSubscribedEvents()
     {
         return [
             ScriptEvents::POST_INSTALL_CMD => 'install',
             ScriptEvents::POST_UPDATE_CMD  => 'update',
         ];
-    }
-
-    private function installDependencies(Event $event, $operations = []): void
-    {
-        $this->addPHPGitHooks();
-    }
-
-    private function addPHPGitHooks(): void
-    {
-        $command = new PHPCsFixerGitHookCommand();
-        $command->setComposer($this->composer);
-        $command->setIO($this->io);
-
-        $command->run(new StringInput(''), new StreamOutput(fopen('php://stdout', 'w')));
     }
 
     public function install(Event $event): void
@@ -65,5 +59,19 @@ class ScriptsPlugin implements PluginInterface, EventSubscriberInterface, Capabl
         return [
             CommandProvider::class => PHPCsFixerCommandProvider::class,
         ];
+    }
+
+    private function installDependencies(Event $event, $operations = []): void
+    {
+        $this->addPHPGitHooks();
+    }
+
+    private function addPHPGitHooks(): void
+    {
+        $command = new PHPCsFixerGitHookCommand();
+        $command->setComposer($this->composer);
+        $command->setIO($this->io);
+
+        $command->run(new StringInput(''), new StreamOutput(fopen('php://stdout', 'w')));
     }
 }

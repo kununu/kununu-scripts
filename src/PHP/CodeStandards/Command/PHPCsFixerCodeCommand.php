@@ -36,7 +36,7 @@ class PHPCsFixerCodeCommand extends BaseCommand
             );
 
             if (0 != $returnVar) {
-                $output->writeln('<error>Errors occured please check output</error>');
+                $output->writeln('<error>Errors occurred please check output</error>');
             } elseif (count($outputExec)) {
                 $output->writeln('<info>RESULT:</info>');
                 $output->writeln($outputExec, true);

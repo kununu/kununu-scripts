@@ -1,36 +1,21 @@
 # kununu-scripts
-- This is a composer plugin that should be added to all kununu PHP repos in order to have coding standards.
-- This plugin applies git pre-hook check of PHP coding standards.
+- This is a composer plugin that can be added to your repositories to check code standards as used on kununu PHP projects.
 
 ## Pre-Requisites
-- If you commit inside docker machine there are no pre-requisites,
-otherwise you have to have PHP cli installed on your local machine (this is needed because php-cs-fixer is a PHP binary).
+- Having PHP cli installed (this is needed because php-cs-fixer is a PHP binary).
 
 ## GIT
-- When you commit PHP code pre-commit hook will check that your code follows the kununu standards, if not it will apply all
+- When you commit PHP code, pre-commit hook will check that your code follows the kununu standards, if not it will apply all
 the necessary changes to make it compliant.
 - You will need to add the files that were not compliant again to the git staging area and commit again.
 - In all this process you will be warn about the steps to take.
-- In case you do not want to apply the changes on the code you can always use _--no-verify_ option.
+- In case you do not want to apply the changes on the code you can always use `--no-verify` option.
 
 ## Installation
 ## Pre-commit hook
-- To use coding standards in our PHP projects we need to include this project on composer.json.
-- To do so just add on repositories option kununu-scripts VCS repo, see below.
-
+- To use coding standards in our PHP projects we need to include this project on composer.json:
 ```
-  "repositories": [
-        ...,
-        {
-          "type": "vcs",
-          "url": "https://github.com/kununu/kununu-scripts.git",
-          "no-api": true
-        }
-    ]
-```
-And run on your machine on inside docker container the following CMD:
-```
-composer --dev require kununu/scripts:*
+composer --dev require kununu/scripts
 ```
 
 - Since this project is a _composer-plugin_ and with the configuration that is done on install or update
@@ -51,7 +36,7 @@ kununu coding standards rules can be found [here](Scripts/php_cs).
 - Runs PHP-CS-FIXER on a list of files and directories. Ex: `composer kununu:cs-fixer-code ./src ./src/file.php ....`
 
 ## Contributing
-- Fell free to contribute.
+- Feel free to contribute.
 - When you add a rule or change the code don't forget to create a new tag of this project.
 - Please only create the tag from master after you merge. (composer stresses if not like this)
 ```
@@ -60,7 +45,7 @@ git push --tags
 ```
 
 ## Future work
-- Make this package to be self update.
+- Make this package to be self updatable.
 - Run the php-cs-fixer cmd inside docker so there is no need to install php cli.
 
 ## Extra
