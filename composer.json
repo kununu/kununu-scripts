@@ -13,7 +13,7 @@
     "require": {
         "php": ">=7.1.0",
         "composer-plugin-api": "^1.1 | ^2.0",
-        "friendsofphp/php-cs-fixer": "^2.15"
+        "friendsofphp/php-cs-fixer": "^3.0"
     },
     "extra": {
         "class": "Kununu\\Scripts\\PHP\\CodeStandards\\ScriptsPlugin"
