@@ -50,6 +50,7 @@ return (new PhpCsFixer\Config())
         'phpdoc_summary' => false,
         'increment_style' => [],
         'method_chaining_indentation' => false,
+        'visibility_required' => ['elements' => ['property', 'method']],
     ])
     ->setFinder($finder)
 ;
