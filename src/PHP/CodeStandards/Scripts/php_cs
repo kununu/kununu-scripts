@@ -1,9 +1,9 @@
 <?php
 
 // Usage
-// php-cs-fixer fix . --diff --dry-run --config=<path>/.php_cs -> [--dry-run (don't apply changes)] [--diff show differences]
-// php-cs-fixer fix application/ --config=<path>/.php_cs -> it will apply changes to all php files
-// php-cs-fixer fix application/Bootstrap.php --config=<path>/.php_cs -> it will apply only changes to a file or directory
+// php-cs-fixer fix . --diff --dry-run --config=<path>/.php-cs-fixer.php -> [--dry-run (don't apply changes)] [--diff show differences]
+// php-cs-fixer fix application/ --config=<path>/.php-cs-fixer.php -> it will apply changes to all php files
+// php-cs-fixer fix application/Bootstrap.php --config=<path>/.php-cs-fixer.php -> it will apply only changes to a file or directory
 
 // Install:
 // wget https://cs.symfony.com/download/php-cs-fixer-v2.phar -O php-cs-fixer
@@ -20,7 +20,7 @@ $finder = PhpCsFixer\Finder::create()
 ;
 
 return (new PhpCsFixer\Config())
-    ->setCacheFile('/tmp/.php_cs.cache')
+    ->setCacheFile('/tmp/.php-cs-fixer.php.cache')
     ->setRiskyAllowed(true)
     ->setRules([
         '@Symfony' => true,
