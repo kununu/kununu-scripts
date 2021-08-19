@@ -42,7 +42,7 @@ class PHPCsFixerGitHookCommand extends BaseCommand
         $this->addLinkToGitFolder(
             $gitPath,
             sprintf('%s/kununu/scripts/src/PHP/CodeStandards/Scripts/php_cs', $vendorDir),
-            '.php_cs'
+            '.php-cs-fixer.php'
         );
 
         // Add php-cs-fixer bin to be available on .git folder.
