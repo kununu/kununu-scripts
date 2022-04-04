@@ -20,7 +20,7 @@ class PHPCsFixerCodeCommand extends BaseCommand
             ->addArgument(self::ARGUMENT, InputArgument::IS_ARRAY);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $arguments = $input->getArgument(self::ARGUMENT);
         if ($arguments) {
@@ -37,7 +37,10 @@ class PHPCsFixerCodeCommand extends BaseCommand
 
             if (0 != $returnVar) {
                 $output->writeln('<error>Errors occurred please check output</error>');
-            } elseif (count($outputExec)) {
+                return 1;
+            }
+
+            if (count($outputExec)) {
                 $output->writeln('<info>RESULT:</info>');
                 $output->writeln($outputExec, true);
             } else {
@@ -46,5 +49,7 @@ class PHPCsFixerCodeCommand extends BaseCommand
         } else {
             $output->writeln('No files or directories where provided');
         }
+
+        return 0;
     }
 }

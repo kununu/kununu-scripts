@@ -15,7 +15,7 @@ class PHPCsFixerGitHookCommand extends BaseCommand
             ->setDescription('Installs PHP CS Fixer Git Pre-Commit Hook');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('<info>' . $this->getName() . '</info> Applying PHP CS Fixer Git Pre-Commit Hook ....');
 
@@ -23,14 +23,14 @@ class PHPCsFixerGitHookCommand extends BaseCommand
         if (0 != $returnVar || !isset($outputExec[0])) {
             $output->writeln('<error>GIT is not available</error>');
 
-            return;
+            return 1;
         }
 
         $gitPath = $outputExec[0] . '/.git';
         if (!is_dir($outputExec[0])) {
             $output->writeln('<error>GIT folder not found at "' . $gitPath . '"</error>');
 
-            return;
+            return 1;
         }
 
         $currentFolder = __DIR__;
@@ -53,6 +53,8 @@ class PHPCsFixerGitHookCommand extends BaseCommand
         );
 
         $output->writeln('<info>' . $this->getName() . '</info> .... Git Hook Applied');
+
+        return 0;
     }
 
     private function addGitHook(string $gitPath, string $file, string $hookName): void
