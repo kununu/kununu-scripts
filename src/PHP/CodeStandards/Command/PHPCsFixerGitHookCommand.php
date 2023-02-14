@@ -59,7 +59,12 @@ class PHPCsFixerGitHookCommand extends BaseCommand
 
     private function addGitHook(string $gitPath, string $file, string $hookName): void
     {
-        $hookPath = $gitPath . '/hooks/' . $hookName;
+        $hooksDir = $gitPath . '/hooks';
+        if (!is_dir($hooksDir)) {
+            mkdir($hooksDir);
+        }
+
+        $hookPath = $hooksDir . '/' . $hookName;
         if (is_file($hookPath)) {
             unlink($hookPath);
         }
