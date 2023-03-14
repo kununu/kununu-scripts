@@ -1,4 +1,8 @@
 <?php
+declare(strict_types=1);
+
+use PhpCsFixer\Config;
+use PhpCsFixer\Finder;
 
 // Usage
 // php-cs-fixer fix . --diff --dry-run --config=<path>/.php-cs-fixer.php -> [--dry-run (don't apply changes)] [--diff show differences]
@@ -6,54 +10,96 @@
 // php-cs-fixer fix application/Bootstrap.php --config=<path>/.php-cs-fixer.php -> it will apply only changes to a file or directory
 
 // Install:
-// wget https://cs.symfony.com/download/php-cs-fixer-v2.phar -O php-cs-fixer
+// wget https://cs.symfony.com/download/php-cs-fixer-v3.phar -O php-cs-fixer
 // chmod a+x php-cs-fixer
 // php-cs-fixer self-update
 // sudo mv php-cs-fixer /usr/local/bin/php-cs-fixer
 
-// Help on rules -> https://mlocati.github.io/php-cs-fixer-configurator/#
+// Help on rules -> https://cs.symfony.com/doc/rules/index.html
 
-$finder = PhpCsFixer\Finder::create()
-    ->exclude('vendor')
-    ->exclude('var')
-    ->in(__DIR__)
-;
-
-return (new PhpCsFixer\Config())
+return (new Config())
     ->setCacheFile('/tmp/.php-cs-fixer.php.cache')
     ->setRiskyAllowed(true)
     ->setRules([
-        '@Symfony' => true,
-        '@Symfony:risky' => true,
-        'combine_consecutive_unsets' => true,
-        'heredoc_to_nowdoc' => true,
-        'no_extra_blank_lines' => ['tokens' => ['break', 'continue', 'extra', 'return', 'throw', 'use', 'parenthesis_brace_block', 'square_brace_block', 'curly_brace_block']],
-        'echo_tag_syntax' => ['format' => 'long'],
+        // Import rule sets
+        '@Symfony'                              => true,
+        '@Symfony:risky'                        => true,
+        // Custom rules
+        'array_indentation'                     => true,
+        'binary_operator_spaces'                => [
+            'operators' => [
+                '=>' => 'align',
+            ],
+        ],
+        'blank_line_after_opening_tag'          => false,
+        'combine_consecutive_unsets'            => true,
+        'concat_space'                          => [
+            'spacing' => 'one',
+        ],
+        'declare_strict_types'                  => true,
+        'echo_tag_syntax'                       => [
+            'format' => 'long',
+        ],
+        'function_declaration'                  => [
+            'closure_function_spacing' => 'none',
+            'closure_fn_spacing'       => 'none',
+        ],
+        'global_namespace_import'               => [
+            'import_classes' => true,
+        ],
+        'heredoc_to_nowdoc'                     => true,
+        'increment_style'                       => [],
+        'method_chaining_indentation'           => false,
+        'native_constant_invocation'            => false,
+        'native_function_invocation'            => false,
+        'no_extra_blank_lines'                  => [
+            'tokens' => [
+                'attribute',
+                'break',
+                'case',
+                'continue',
+                'curly_brace_block',
+                'default',
+                'extra',
+                'parenthesis_brace_block',
+                'return',
+                'square_brace_block',
+                'switch',
+                'throw',
+                'use',
+            ],
+        ],
+        'no_superfluous_phpdoc_tags'            => false,
+        'no_trailing_whitespace_in_string'      => false,
         'no_unreachable_default_argument_value' => true,
-        'no_useless_else' => true,
-        'no_useless_return' => true,
-        'ordered_imports' => ['imports_order' => ['class', 'function', 'const'], 'sort_algorithm' => 'alpha'],
-        'phpdoc_order' => true,
-	    'global_namespace_import' => ['import_classes' => true],
-        'function_declaration' => ['closure_function_spacing' => 'none'],
-        'ternary_to_null_coalescing' => true,
-        'array_indentation' => true,
-        'blank_line_after_opening_tag' => false,
-        'self_accessor' => false,
-        'binary_operator_spaces' => ['operators' => ['=>' => 'align']],
-        'native_constant_invocation' => false,
-        'void_return' => true,
-        'concat_space' => ['spacing' => 'one'],
-        'native_function_invocation' => false,
-        'no_superfluous_phpdoc_tags' => false,
-        'yoda_style' => [],
-        'phpdoc_summary' => false,
-        'increment_style' => [],
-        'method_chaining_indentation' => false,
-        'visibility_required' => ['elements' => ['property', 'method']],
-        'self_static_accessor' => true,
-        'no_trailing_whitespace_in_string' => false,
-        'return_assignment' => true,
+        'no_useless_else'                       => true,
+        'no_useless_return'                     => true,
+        'ordered_imports'                       => [
+            'imports_order'  => [
+                'class',
+                'function',
+                'const',
+            ],
+            'sort_algorithm' => 'alpha',
+        ],
+        'phpdoc_order'                          => true,
+        'phpdoc_summary'                        => false,
+        'return_assignment'                     => true,
+        'self_accessor'                         => false,
+        'self_static_accessor'                  => true,
+        'ternary_to_null_coalescing'            => true,
+        'visibility_required'                   => [
+            'elements' => [
+                'property',
+                'method',
+            ],
+        ],
+        'void_return'                           => true,
+        'yoda_style'                            => [],
     ])
-    ->setFinder($finder)
-;
+    ->setFinder(
+        Finder::create()
+            ->exclude('vendor')
+            ->exclude('var')
+            ->in(__DIR__)
+    );

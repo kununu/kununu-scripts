@@ -1,26 +1,32 @@
 {
-    "name": "kununu/scripts",
-    "description": "Composer plugin to check code standards the kununu way",
-    "type": "composer-plugin",
-    "keywords": ["standards", "development"],
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Tiago Pinheiro",
-            "email": "tiago.pinheiro@kununu.com"
-        }
-    ],
-    "require": {
-        "php": ">=7.1.0",
-        "composer-plugin-api": "^1.1 | ^2.0",
-        "friendsofphp/php-cs-fixer": "^3.0"
-    },
-    "extra": {
-        "class": "Kununu\\Scripts\\PHP\\CodeStandards\\ScriptsPlugin"
-    },
-    "autoload": {
-        "psr-4": {
-            "Kununu\\Scripts\\": "src/"
-        }
+  "name": "kununu/scripts",
+  "description": "Composer plugin to check code standards the kununu way",
+  "type": "composer-plugin",
+  "keywords": [
+    "standards",
+    "development"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Tiago Pinheiro",
+      "email": "tiago.pinheiro@kununu.com"
     }
+  ],
+  "require": {
+    "php": ">=8.0",
+    "composer-plugin-api": "^2.0",
+    "friendsofphp/php-cs-fixer": "^3.0"
+  },
+  "require-dev": {
+    "composer/composer": "^2.0"
+  },
+  "extra": {
+    "class": "Kununu\\Scripts\\PHP\\CodeStandards\\ScriptsPlugin"
+  },
+  "autoload": {
+    "psr-4": {
+      "Kununu\\Scripts\\": "src/"
+    }
+  }
 }

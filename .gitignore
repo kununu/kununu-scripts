@@ -4,3 +4,4 @@ composer.phar
 vendor/
 .php-cs-fixer.php.cache
 .php_cs.cache
+.php-cs-fixer.cache

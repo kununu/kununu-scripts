@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Kununu\Scripts\PHP\CodeStandards;
 
@@ -8,19 +9,23 @@ use Composer\IO\IOInterface;
 use Composer\Plugin\Capability\CommandProvider;
 use Composer\Plugin\Capable;
 use Composer\Plugin\PluginInterface;
-use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
 use Kununu\Scripts\PHP\CodeStandards\Command\PHPCsFixerGitHookCommand;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\StreamOutput;
 
-class ScriptsPlugin implements PluginInterface, EventSubscriberInterface, Capable
+final class ScriptsPlugin implements PluginInterface, EventSubscriberInterface, Capable
 {
-    /** @var Composer */
-    protected $composer;
+    private Composer $composer;
+    private IOInterface $io;
 
-    /** @var IOInterface */
-    protected $io;
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            ScriptEvents::POST_INSTALL_CMD => 'addPHPGitHooks',
+            ScriptEvents::POST_UPDATE_CMD  => 'addPHPGitHooks',
+        ];
+    }
 
     public function activate(Composer $composer, IOInterface $io): void
     {
@@ -28,45 +33,22 @@ class ScriptsPlugin implements PluginInterface, EventSubscriberInterface, Capabl
         $this->io = $io;
     }
 
-    public function deactivate(Composer $composer, IOInterface $io)
+    public function deactivate(Composer $composer, IOInterface $io): void
     {
     }
 
-    public function uninstall(Composer $composer, IOInterface $io)
+    public function uninstall(Composer $composer, IOInterface $io): void
     {
     }
 
-    public static function getSubscribedEvents()
-    {
-        return [
-            ScriptEvents::POST_INSTALL_CMD => 'install',
-            ScriptEvents::POST_UPDATE_CMD  => 'update',
-        ];
-    }
-
-    public function install(Event $event): void
-    {
-        $this->update($event);
-    }
-
-    public function update(Event $event, $operations = []): void
-    {
-        $this->installDependencies($event, $operations);
-    }
-
-    public function getCapabilities()
+    public function getCapabilities(): array
     {
         return [
             CommandProvider::class => PHPCsFixerCommandProvider::class,
         ];
     }
 
-    private function installDependencies(Event $event, $operations = []): void
-    {
-        $this->addPHPGitHooks();
-    }
-
-    private function addPHPGitHooks(): void
+    public function addPHPGitHooks(): void
     {
         $command = new PHPCsFixerGitHookCommand();
         $command->setComposer($this->composer);

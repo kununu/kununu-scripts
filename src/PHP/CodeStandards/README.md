@@ -8,7 +8,7 @@
 - When you commit PHP code, pre-commit hook will check that your code follows the kununu standards, if not it will apply all
 the necessary changes to make it compliant.
 - You will need to add the files that were not compliant again to the git staging area and commit again.
-- In all this process you will be warn about the steps to take.
+- In all this process you will be warned about the steps to take.
 - In case you do not want to apply the changes on the code you can always use `--no-verify` option.
 
 ## Installation
@@ -52,7 +52,7 @@ git push --tags
 - If you want to install locally php-cs-fixer just:
 
 ```bash
-wget https://cs.symfony.com/download/php-cs-fixer-v2.phar -O php-cs-fixer
+wget https://cs.symfony.com/download/php-cs-fixer-v3.phar -O php-cs-fixer
 chmod a+x php-cs-fixer
 php-cs-fixer self-update
 sudo mv php-cs-fixer /usr/local/bin/php-cs-fixer
