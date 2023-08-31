@@ -84,7 +84,9 @@ return (new Config())
         ],
         'void_return'                                      => true,
         'yoda_style'                                       => [],
-        'nullable_type_declaration_for_default_null_value' => true,
+        'nullable_type_declaration_for_default_null_value' => [
+            'use_nullable_type_declaration' => true,
+        ],
     ])
     ->setFinder(
         Finder::create()
