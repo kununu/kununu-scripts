@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Kununu\Scripts\PHP\CodeStandards\Command;
 
@@ -6,11 +7,12 @@ use Composer\Command\BaseCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class PHPCsFixerGitHookCommand extends BaseCommand
+final class PHPCsFixerGitHookCommand extends BaseCommand
 {
     protected function configure(): void
     {
-        $this->setName('kununu:cs-fixer-git-hook')
+        $this
+            ->setName('kununu:cs-fixer-git-hook')
             ->setAliases(['cs-fixer-git-hook'])
             ->setDescription('Installs PHP CS Fixer Git Pre-Commit Hook');
     }
@@ -34,7 +36,7 @@ class PHPCsFixerGitHookCommand extends BaseCommand
         }
 
         $currentFolder = __DIR__;
-        $this->addGitHook($gitPath, $currentFolder . '/../Scripts/git-pre-commit', 'pre-commit');
+        $this->addGitHook($gitPath, $currentFolder . '/../Scripts/git-pre-commit');
 
         // Add php-cs-fixer rules to be available on .git folder.
         $vendorDir = is_dir(sprintf('%s/services/vendor', $outputExec[0])) ? '../../services/vendor' : '../../vendor';
@@ -57,14 +59,14 @@ class PHPCsFixerGitHookCommand extends BaseCommand
         return 0;
     }
 
-    private function addGitHook(string $gitPath, string $file, string $hookName): void
+    private function addGitHook(string $gitPath, string $file): void
     {
         $hooksDir = $gitPath . '/hooks';
         if (!is_dir($hooksDir)) {
             mkdir($hooksDir);
         }
 
-        $hookPath = $hooksDir . '/' . $hookName;
+        $hookPath = $hooksDir . '/pre-commit';
         if (is_file($hookPath)) {
             unlink($hookPath);
         }
