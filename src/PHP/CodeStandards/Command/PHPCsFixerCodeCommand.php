@@ -30,12 +30,12 @@ final class PHPCsFixerCodeCommand extends BaseCommand
             $vendorDir = $this->requireComposer()->getConfig()->get('vendor-dir');
 
             exec(
-                $vendorDir . '/bin/php-cs-fixer fix --config ' . __DIR__ . '/../Scripts/php_cs ' . $files,
+                sprintf('%s/bin/php-cs-fixer fix --config %s/../Scripts/php_cs %s', $vendorDir, __DIR__, $files),
                 $outputExec,
                 $returnVar
             );
 
-            if (0 != $returnVar) {
+            if (0 !== $returnVar) {
                 $output->writeln('<error>Errors occurred please check output</error>');
 
                 return 1;

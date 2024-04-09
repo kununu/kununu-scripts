@@ -21,4 +21,4 @@ Follow the [component ownership matrix](https://confluence.xing.hh/display/kunun
 
 ## Reporting the update of dependencies
 
-This is the benefit of having Dependabot. It will open pull requests for security and version updates. For more information check the Github [documentation](https://docs.github.com/en/github/administering-a-repository/managing-pull-requests-for-dependency-updates).
+This is the benefit of having Dependabot. It will open pull requests for security and version updates. For more information check the GitHub [documentation](https://docs.github.com/en/github/administering-a-repository/managing-pull-requests-for-dependency-updates).

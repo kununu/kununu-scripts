@@ -19,24 +19,24 @@ final class PHPCsFixerGitHookCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln('<info>' . $this->getName() . '</info> Applying PHP CS Fixer Git Pre-Commit Hook ....');
+        $output->writeln(sprintf('<info>%s</info> Applying PHP CS Fixer Git Pre-Commit Hook...', $this->getName()));
 
         exec('git rev-parse --show-toplevel', $outputExec, $returnVar);
-        if (0 != $returnVar || !isset($outputExec[0])) {
+        if (0 !== $returnVar || !isset($outputExec[0])) {
             $output->writeln('<error>GIT is not available</error>');
 
             return 1;
         }
 
-        $gitPath = $outputExec[0] . '/.git';
+        $gitPath = sprintf('%s/.git', $outputExec[0]);
         if (!is_dir($outputExec[0])) {
-            $output->writeln('<error>GIT folder not found at "' . $gitPath . '"</error>');
+            $output->writeln(sprintf('<error>GIT folder not found at "%s"</error>', $gitPath));
 
             return 1;
         }
 
         $currentFolder = __DIR__;
-        $this->addGitHook($gitPath, $currentFolder . '/../Scripts/git-pre-commit');
+        $this->addGitHook($gitPath, sprintf('%s/../Scripts/git-pre-commit', $currentFolder));
 
         // Add php-cs-fixer rules to be available on .git folder.
         $vendorDir = is_dir(sprintf('%s/services/vendor', $outputExec[0])) ? '../../services/vendor' : '../../vendor';
@@ -54,19 +54,19 @@ final class PHPCsFixerGitHookCommand extends BaseCommand
             'php-cs-fixer'
         );
 
-        $output->writeln('<info>' . $this->getName() . '</info> .... Git Hook Applied');
+        $output->writeln(sprintf('<info>%s</info> Git Hook Applied', $this->getName()));
 
         return 0;
     }
 
     private function addGitHook(string $gitPath, string $file): void
     {
-        $hooksDir = $gitPath . '/hooks';
+        $hooksDir = sprintf('%s/hooks', $gitPath);
         if (!is_dir($hooksDir)) {
             mkdir($hooksDir);
         }
 
-        $hookPath = $hooksDir . '/pre-commit';
+        $hookPath = sprintf('%s/pre-commit', $hooksDir);
         if (is_file($hookPath)) {
             unlink($hookPath);
         }
@@ -78,12 +78,12 @@ final class PHPCsFixerGitHookCommand extends BaseCommand
     private function addLinkToGitFolder(string $gitPath, string $origin, string $linkName): void
     {
         // In order to make it clear a folder is created named kununu with the dependencies for pre-commit.
-        $kununuBinPath = $gitPath . '/kununu';
+        $kununuBinPath = sprintf('%s/kununu', $gitPath);
         if (!is_dir($kununuBinPath)) {
             mkdir($kununuBinPath);
         }
 
-        $kununuLink = $kununuBinPath . '/' . $linkName;
+        $kununuLink = sprintf('%s/%s', $kununuBinPath, $linkName);
         if (is_link($kununuLink)) {
             unlink($kununuLink);
         }
