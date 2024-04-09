@@ -36,7 +36,7 @@ return (new Config())
             'import_classes' => true,
         ],
         'heredoc_to_nowdoc'                                => true,
-        'increment_style'                                  => [],
+        'increment_style'                                  => ['style' => 'pre'],
         'method_chaining_indentation'                      => false,
         'native_constant_invocation'                       => false,
         'native_function_invocation'                       => false,
@@ -83,7 +83,7 @@ return (new Config())
             ],
         ],
         'void_return'                                      => true,
-        'yoda_style'                                       => [],
+        'yoda_style'                                       => false,
         'nullable_type_declaration_for_default_null_value' => [
             'use_nullable_type_declaration' => true,
         ],
