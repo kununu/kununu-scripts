@@ -13,11 +13,11 @@ Jira is our entrypoint to report security vulnerabilities. Having this mind a KU
 
 #### How to fill the user story?
 
-Follow this [documentation](https://confluence.xing.hh/pages/viewpage.action?pageId=381133070).
+Follow this [documentation](https://new-work.atlassian.net/wiki/spaces/kununu/pages/47846323/Vulnerability+Issue+Type+Jira).
 
 #### To which team do I assign the user story?
 
-Follow the [component ownership matrix](https://confluence.xing.hh/display/kununu/Component+ownership+and+support) and assign it to the corresponding team.
+Follow the [domain ownership matrix](https://new-work.atlassian.net/wiki/spaces/kununu/pages/113148000/Domain+ownership+matrix) and assign it to the corresponding team.
 
 ## Reporting the update of dependencies
 
