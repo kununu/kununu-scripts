@@ -3,9 +3,11 @@ declare(strict_types=1);
 
 use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
+use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
 
 // Help on rules -> https://cs.symfony.com/doc/rules/index.html
 return (new Config())
+    ->setParallelConfig(ParallelConfigFactory::detect())
     ->setCacheFile('/tmp/.php-cs-fixer.php.cache')
     ->setRiskyAllowed(true)
     ->setRules([
@@ -31,6 +33,7 @@ return (new Config())
         'echo_tag_syntax'                                  => [
             'format' => 'long',
         ],
+        'explicit_indirect_variable'                       => true,
         'function_declaration'                             => [
             'closure_function_spacing' => 'none',
             'closure_fn_spacing'       => 'none',
