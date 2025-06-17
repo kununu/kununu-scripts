@@ -19,11 +19,6 @@ return (new Config())
         'attribute_empty_parentheses'                      => [
             'use_parentheses' => false,
         ],
-        'binary_operator_spaces'                           => [
-            'operators' => [
-                '=>' => 'align',
-            ],
-        ],
         'blank_line_after_opening_tag'                     => false,
         'combine_consecutive_unsets'                       => true,
         'concat_space'                                     => [
