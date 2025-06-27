@@ -15,10 +15,6 @@ return (new Config())
         '@Symfony'                                         => true,
         '@Symfony:risky'                                   => true,
         // Custom rules
-        'array_indentation'                                => true,
-        'attribute_empty_parentheses'                      => [
-            'use_parentheses' => false,
-        ],
         'binary_operator_spaces'                           => [
             'operators' => [
                 '=>' => 'align',
@@ -30,9 +26,6 @@ return (new Config())
             'spacing' => 'one',
         ],
         'declare_strict_types'                             => true,
-        'echo_tag_syntax'                                  => [
-            'format' => 'long',
-        ],
         'explicit_indirect_variable'                       => true,
         'function_declaration'                             => [
             'closure_function_spacing' => 'none',
@@ -42,7 +35,6 @@ return (new Config())
             'import_classes' => true,
         ],
         'heredoc_to_nowdoc'                                => true,
-        'increment_style'                                  => ['style' => 'pre'],
         'method_chaining_indentation'                      => false,
         'native_constant_invocation'                       => false,
         'native_function_invocation'                       => false,
@@ -65,22 +57,14 @@ return (new Config())
         ],
         'no_superfluous_phpdoc_tags'                       => false,
         'no_trailing_whitespace_in_string'                 => false,
-        'no_unreachable_default_argument_value'            => true,
         'no_useless_else'                                  => true,
         'no_useless_return'                                => true,
-        'ordered_imports'                                  => [
-            'imports_order'  => [
-                'class',
-                'function',
-                'const',
-            ],
-            'sort_algorithm' => 'alpha',
-        ],
         'phpdoc_order'                                     => true,
         'phpdoc_summary'                                   => false,
         'return_assignment'                                => true,
         'self_accessor'                                    => false,
         'self_static_accessor'                             => true,
+        'single_line_throw'                                => false,
         'ternary_to_null_coalescing'                       => true,
         'visibility_required'                              => [
             'elements' => [
@@ -90,10 +74,6 @@ return (new Config())
         ],
         'void_return'                                      => true,
         'yoda_style'                                       => false,
-        'nullable_type_declaration_for_default_null_value' => [
-            'use_nullable_type_declaration' => true,
-        ],
-        'single_line_throw'                                => false,
     ])
     ->setFinder(
         Finder::create()
