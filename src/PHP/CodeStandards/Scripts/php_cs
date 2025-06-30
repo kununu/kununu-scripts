@@ -35,7 +35,6 @@ return (new Config())
             'import_classes' => true,
         ],
         'heredoc_to_nowdoc'                                => true,
-        'method_chaining_indentation'                      => false,
         'native_constant_invocation'                       => false,
         'native_function_invocation'                       => false,
         'no_extra_blank_lines'                             => [
@@ -66,12 +65,6 @@ return (new Config())
         'self_static_accessor'                             => true,
         'single_line_throw'                                => false,
         'ternary_to_null_coalescing'                       => true,
-        'visibility_required'                              => [
-            'elements' => [
-                'property',
-                'method',
-            ],
-        ],
         'void_return'                                      => true,
         'yoda_style'                                       => false,
     ])
