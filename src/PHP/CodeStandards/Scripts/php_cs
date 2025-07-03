@@ -12,41 +12,37 @@ return (new Config())
     ->setRiskyAllowed(true)
     ->setRules([
         // Import rule sets
-        '@Symfony'                                         => true,
-        '@Symfony:risky'                                   => true,
+        '@Symfony'                         => true,
+        '@Symfony:risky'                   => true,
         // Custom rules
-        'array_indentation'                                => true,
-        'attribute_empty_parentheses'                      => [
-            'use_parentheses' => false,
-        ],
-        'binary_operator_spaces'                           => [
+        'binary_operator_spaces'           => [
             'operators' => [
                 '=>' => 'align',
             ],
         ],
-        'blank_line_after_opening_tag'                     => false,
-        'combine_consecutive_unsets'                       => true,
-        'concat_space'                                     => [
+        'blank_line_after_opening_tag'     => false,
+        'combine_consecutive_unsets'       => true,
+        'concat_space'                     => [
             'spacing' => 'one',
         ],
-        'declare_strict_types'                             => true,
-        'echo_tag_syntax'                                  => [
-            'format' => 'long',
-        ],
-        'explicit_indirect_variable'                       => true,
-        'function_declaration'                             => [
+        'declare_strict_types'             => true,
+        'explicit_indirect_variable'       => true,
+        'function_declaration'             => [
             'closure_function_spacing' => 'none',
             'closure_fn_spacing'       => 'none',
         ],
-        'global_namespace_import'                          => [
+        'global_namespace_import'          => [
             'import_classes' => true,
         ],
-        'heredoc_to_nowdoc'                                => true,
-        'increment_style'                                  => ['style' => 'pre'],
-        'method_chaining_indentation'                      => false,
-        'native_constant_invocation'                       => false,
-        'native_function_invocation'                       => false,
-        'no_extra_blank_lines'                             => [
+        'heredoc_to_nowdoc'                => true,
+        'native_constant_invocation'       => [
+            'fix_built_in' => false,
+            'strict'       => true,
+        ],
+        'native_function_invocation'       => [
+            'include' => [],
+        ],
+        'no_extra_blank_lines'             => [
             'tokens' => [
                 'attribute',
                 'break',
@@ -63,37 +59,23 @@ return (new Config())
                 'use',
             ],
         ],
-        'no_superfluous_phpdoc_tags'                       => false,
-        'no_trailing_whitespace_in_string'                 => false,
-        'no_unreachable_default_argument_value'            => true,
-        'no_useless_else'                                  => true,
-        'no_useless_return'                                => true,
-        'ordered_imports'                                  => [
-            'imports_order'  => [
-                'class',
-                'function',
-                'const',
-            ],
-            'sort_algorithm' => 'alpha',
+        'no_superfluous_phpdoc_tags'       => false,
+        'no_trailing_whitespace_in_string' => false,
+        'no_useless_else'                  => true,
+        'no_useless_return'                => true,
+        'phpdoc_summary'                   => false,
+        'return_assignment'                => true,
+        'self_accessor'                    => false,
+        'self_static_accessor'             => true,
+        'single_line_throw'                => false,
+        'ternary_to_null_coalescing'       => true,
+        'void_return'                      => true,
+        'yoda_style'                       => [
+            'always_move_variable' => false,
+            'equal'                => false,
+            'identical'            => false,
+            'less_and_greater'     => false,
         ],
-        'phpdoc_order'                                     => true,
-        'phpdoc_summary'                                   => false,
-        'return_assignment'                                => true,
-        'self_accessor'                                    => false,
-        'self_static_accessor'                             => true,
-        'ternary_to_null_coalescing'                       => true,
-        'visibility_required'                              => [
-            'elements' => [
-                'property',
-                'method',
-            ],
-        ],
-        'void_return'                                      => true,
-        'yoda_style'                                       => false,
-        'nullable_type_declaration_for_default_null_value' => [
-            'use_nullable_type_declaration' => true,
-        ],
-        'single_line_throw'                                => false,
     ])
     ->setFinder(
         Finder::create()
