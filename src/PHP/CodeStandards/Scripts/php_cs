@@ -72,9 +72,9 @@ return (new Config())
         'void_return'                      => true,
         'yoda_style'                       => [
             'always_move_variable' => false,
-            'equal'                => false,
-            'identical'            => false,
-            'less_and_greater'     => false,
+            'equal'                => null,
+            'identical'            => null,
+            'less_and_greater'     => null,
         ],
     ])
     ->setFinder(
