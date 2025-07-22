@@ -1,12 +1,12 @@
 {
   "name": "kununu/scripts",
   "description": "Composer plugin to check code standards the kununu way",
+  "license": "MIT",
   "type": "composer-plugin",
   "keywords": [
     "standards",
     "development"
   ],
-  "license": "MIT",
   "authors": [
     {
       "name": "Tiago Pinheiro",
@@ -16,17 +16,17 @@
   "require": {
     "php": ">=8.3",
     "composer-plugin-api": "^2.0",
-    "friendsofphp/php-cs-fixer": "^3.0"
+    "friendsofphp/php-cs-fixer": "^3.8"
   },
   "require-dev": {
     "composer/composer": "^2.0"
-  },
-  "extra": {
-    "class": "Kununu\\Scripts\\PHP\\CodeStandards\\ScriptsPlugin"
   },
   "autoload": {
     "psr-4": {
       "Kununu\\Scripts\\": "src/"
     }
+  },
+  "extra": {
+    "class": "Kununu\\Scripts\\PHP\\CodeStandards\\ScriptsPlugin"
   }
 }
